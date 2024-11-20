@@ -1,0 +1,8 @@
+10:52:55 **** Clean-only build of configuration Debug for project mb_usb_hdmi_system ****
+make clean 
+rm -rf ./_sds
+rm -rf package
+rm -f system.bif
+
+10:52:56 Build Finished (took 258ms)
+
