@@ -77,6 +77,12 @@ module nds_capture_top(
     output logic LED3
 );
 
+wire dclk_bufg;
+BUFG bufg_inst (
+.I(DCLK),
+.O(dclk_bufg)
+);
+
 pins_xor pins_xor (
     .R0(T_R0),
     .R1(T_R1),
@@ -99,7 +105,9 @@ pins_xor pins_xor (
     .B4(T_B4),
     .B5(T_B5),
     
-    .DCLK(DCLK),
+    .reset_n(reset_rtl_0),
+    
+    .DCLK(dclk_bufg),
     .GSP(GSP),
     .LS(LS),
     
