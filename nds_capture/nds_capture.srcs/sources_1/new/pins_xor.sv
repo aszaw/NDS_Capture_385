@@ -20,11 +20,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
+
 module pins_xor (
     input logic R0, R1, R2, R3, R4, R5,
     input logic G0, G1, G2, G3, G4, G5,
     input logic B0, B1, B2, B3, B4, B5,
     input logic DCLK, GSP, LS,
+    input logic CLK,
     input logic reset_n,            // Active-low reset
     output logic LED0, LED1, LED2, LED3
 );
@@ -32,7 +34,7 @@ module pins_xor (
         // Stage 1: Register intermediate XORs
     logic red_xor_ff, green_xor_ff, blue_xor_ff;
 
-    always @(posedge DCLK or negedge reset_n) begin
+    always @(posedge CLK or negedge reset_n) begin
         if (!reset_n) begin
             red_xor_ff   <= 1'b0;
             green_xor_ff <= 1'b0;
@@ -47,7 +49,7 @@ module pins_xor (
     // Stage 2: Register final XOR result
     logic combined_xor_ff;
 
-    always @(posedge DCLK or negedge reset_n) begin
+    always @(posedge CLK or negedge reset_n) begin
         if (!reset_n) begin
             combined_xor_ff <= 1'b0;
         end else begin

@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="61" Path="C:/Users/Aaro/Documents/GitHub/ece385/lab_6_2/lab_6_2/lab_6_2.xpr">
+<Project Version="7" Minor="61" Path="C:/Users/Aaro/Desktop/385/NDS_Capture_385/lab_6_2/lab_6_2.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="7b7c80ee37c446a2a659dbd53efa2726"/>
@@ -46,7 +46,7 @@
     <Option Name="ActiveSimSet" Val="sim_1"/>
     <Option Name="DefaultLib" Val="xil_defaultlib"/>
     <Option Name="ProjectType" Val="Default"/>
-    <Option Name="IPRepoPath" Val="$PPRDIR/../../RD_hdmi_ip2020"/>
+    <Option Name="IPRepoPath" Val="$PPRDIR/../../../../Documents/GitHub/ece385/RD_hdmi_ip2020"/>
     <Option Name="IPOutputRepo" Val="$PCACHEDIR/ip"/>
     <Option Name="IPDefaultOutputPath" Val="$PGENDIR/sources_1"/>
     <Option Name="IPCachePermission" Val="read"/>
@@ -102,8 +102,20 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_microblaze_0_0/mb_usb_microblaze_0_0.xci">
+          <Proxy FileSetName="mb_usb_microblaze_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_dlmb_v10_0/mb_usb_dlmb_v10_0.xci">
+          <Proxy FileSetName="mb_usb_dlmb_v10_0"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_lmb_bram_0/mb_usb_lmb_bram_0.xci">
           <Proxy FileSetName="mb_usb_lmb_bram_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_mdm_1_0/mb_usb_mdm_1_0.xci">
+          <Proxy FileSetName="mb_usb_mdm_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_dlmb_bram_if_cntlr_0/mb_usb_dlmb_bram_if_cntlr_0.xci">
+          <Proxy FileSetName="mb_usb_dlmb_bram_if_cntlr_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_xbar_0/mb_usb_xbar_0.xci">
           <Proxy FileSetName="mb_usb_xbar_0"/>
@@ -111,75 +123,63 @@
         <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_microblaze_0_axi_intc_0/mb_usb_microblaze_0_axi_intc_0.xci">
           <Proxy FileSetName="mb_usb_microblaze_0_axi_intc_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_dlmb_v10_0/mb_usb_dlmb_v10_0.xci">
-          <Proxy FileSetName="mb_usb_dlmb_v10_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_ilmb_v10_0/mb_usb_ilmb_v10_0.xci">
           <Proxy FileSetName="mb_usb_ilmb_v10_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_dlmb_bram_if_cntlr_0/mb_usb_dlmb_bram_if_cntlr_0.xci">
-          <Proxy FileSetName="mb_usb_dlmb_bram_if_cntlr_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_gpio_0_0/mb_usb_axi_gpio_0_0.xci">
-          <Proxy FileSetName="mb_usb_axi_gpio_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_uartlite_0_0/mb_usb_axi_uartlite_0_0.xci">
-          <Proxy FileSetName="mb_usb_axi_uartlite_0_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_rst_clk_wiz_1_100M_0/mb_usb_rst_clk_wiz_1_100M_0.xci">
           <Proxy FileSetName="mb_usb_rst_clk_wiz_1_100M_0"/>
         </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_uartlite_0_0/mb_usb_axi_uartlite_0_0.xci">
+          <Proxy FileSetName="mb_usb_axi_uartlite_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_gpio_0_0/mb_usb_axi_gpio_0_0.xci">
+          <Proxy FileSetName="mb_usb_axi_gpio_0_0"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_timer_0_0/mb_usb_axi_timer_0_0.xci">
           <Proxy FileSetName="mb_usb_axi_timer_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_gpio_2_0/mb_usb_axi_gpio_2_0.xci">
-          <Proxy FileSetName="mb_usb_axi_gpio_2_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_mdm_1_0/mb_usb_mdm_1_0.xci">
-          <Proxy FileSetName="mb_usb_mdm_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_gpio_1_0/mb_usb_axi_gpio_1_0.xci">
-          <Proxy FileSetName="mb_usb_axi_gpio_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_quad_spi_0_1/mb_usb_axi_quad_spi_0_1.xci">
-          <Proxy FileSetName="mb_usb_axi_quad_spi_0_1"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_clk_wiz_0_0/mb_usb_clk_wiz_0_0.xci">
           <Proxy FileSetName="mb_usb_clk_wiz_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_microblaze_0_0/mb_usb_microblaze_0_0.xci">
-          <Proxy FileSetName="mb_usb_microblaze_0_0"/>
+        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_gpio_2_0/mb_usb_axi_gpio_2_0.xci">
+          <Proxy FileSetName="mb_usb_axi_gpio_2_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_quad_spi_0_1/mb_usb_axi_quad_spi_0_1.xci">
+          <Proxy FileSetName="mb_usb_axi_quad_spi_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="mb_usb.bd" FileRelPathName="ip/mb_usb_axi_gpio_1_0/mb_usb_axi_gpio_1_0.xci">
+          <Proxy FileSetName="mb_usb_axi_gpio_1_0"/>
         </CompFileExtendedInfo>
       </File>
-      <File Path="$PPRDIR/../../../../../Downloads/lab6_2_provided/design_source/Color_Mapper.sv">
+      <File Path="$PPRDIR/../../../../Downloads/lab6_2_provided/design_source/Color_Mapper.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../../../Downloads/lab6_2_provided/design_source/VGA_controller.sv">
+      <File Path="$PPRDIR/../../../../Downloads/lab6_2_provided/design_source/VGA_controller.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../../../Downloads/lab6_2_provided/design_source/ball.sv">
+      <File Path="$PPRDIR/../../../../Downloads/lab6_2_provided/design_source/ball.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../../../Downloads/lab6_2_provided/design_source/hex_driver.sv">
+      <File Path="$PPRDIR/../../../../Downloads/lab6_2_provided/design_source/hex_driver.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../../../Downloads/lab6_2_provided/design_source/mb_usb_hdmi_top.sv">
+      <File Path="$PPRDIR/../../../../Downloads/lab6_2_provided/design_source/mb_usb_hdmi_top.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -202,7 +202,7 @@
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
       <Filter Type="Constrs"/>
-      <File Path="$PPRDIR/../../../../../Downloads/lab6_2_provided/pin_assignment/mb_usb_hdmi_top.xdc">
+      <File Path="$PPRDIR/../../../../Downloads/lab6_2_provided/pin_assignment/mb_usb_hdmi_top.xdc">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -277,12 +277,6 @@
     <FileSet Name="mb_usb_dlmb_bram_if_cntlr_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/mb_usb_dlmb_bram_if_cntlr_0" RelGenDir="$PGENDIR/mb_usb_dlmb_bram_if_cntlr_0">
       <Config>
         <Option Name="TopModule" Val="mb_usb_dlmb_bram_if_cntlr_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
-    <FileSet Name="mb_usb_ilmb_bram_if_cntlr_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/mb_usb_ilmb_bram_if_cntlr_0" RelGenDir="$PGENDIR/mb_usb_ilmb_bram_if_cntlr_0">
-      <Config>
-        <Option Name="TopModule" Val="mb_usb_ilmb_bram_if_cntlr_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -429,16 +423,6 @@
       <RQSFiles/>
     </Run>
     <Run Id="mb_usb_dlmb_bram_if_cntlr_0_synth_1" Type="Ft3:Synth" SrcSet="mb_usb_dlmb_bram_if_cntlr_0" Part="xc7s50csga324-1" ConstrsSet="mb_usb_dlmb_bram_if_cntlr_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/mb_usb_dlmb_bram_if_cntlr_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/mb_usb_dlmb_bram_if_cntlr_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/mb_usb_dlmb_bram_if_cntlr_0_synth_1">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2022"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2022"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="mb_usb_ilmb_bram_if_cntlr_0_synth_1" Type="Ft3:Synth" SrcSet="mb_usb_ilmb_bram_if_cntlr_0" Part="xc7s50csga324-1" ConstrsSet="mb_usb_ilmb_bram_if_cntlr_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/mb_usb_ilmb_bram_if_cntlr_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/mb_usb_ilmb_bram_if_cntlr_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/mb_usb_ilmb_bram_if_cntlr_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2022"/>
         <Step Id="synth_design"/>
@@ -655,23 +639,6 @@
       <RQSFiles/>
     </Run>
     <Run Id="mb_usb_dlmb_bram_if_cntlr_0_impl_1" Type="Ft2:EntireDesign" Part="xc7s50csga324-1" ConstrsSet="mb_usb_dlmb_bram_if_cntlr_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="mb_usb_dlmb_bram_if_cntlr_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/mb_usb_dlmb_bram_if_cntlr_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/mb_usb_dlmb_bram_if_cntlr_0_impl_1">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2022"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2022"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="mb_usb_ilmb_bram_if_cntlr_0_impl_1" Type="Ft2:EntireDesign" Part="xc7s50csga324-1" ConstrsSet="mb_usb_ilmb_bram_if_cntlr_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="mb_usb_ilmb_bram_if_cntlr_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/mb_usb_ilmb_bram_if_cntlr_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/mb_usb_ilmb_bram_if_cntlr_0_impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2022"/>
         <Step Id="init_design"/>
