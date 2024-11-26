@@ -70,30 +70,77 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param checkpoint.writeSynthRtdsInDcp 1
 set_param chipscope.maxJobs 4
-set_param synth.incrementalSynthesisCache C:/Users/Aaro/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-13596-DESKTOP-0G38QBS/incrSyn
-set_param xicom.use_bs_reader 1
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
+set_msg_config -id {HDL-1065} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7s50csga324-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
+set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.cache/wt [current_project]
 set_property parent.project_path C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.xpr [current_project]
+set_property XPM_LIBRARIES {XPM_CDC XPM_FIFO XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
+set_property ip_repo_paths {
+  c:/Users/Aaro/Desktop/385/NDS_Capture_385/ip_repo/nds_axi_framebuffer_1_0
+  c:/Users/Aaro/Documents/GitHub/ece385/ip_repo
+  c:/Users/Aaro/Documents/GitHub/ece385/RD_hdmi_ip2020
+  c:/Users/Aaro/Desktop/385/NDS_Capture_385/7_2_guyanw2/ip_repo
+} [current_project]
+update_ip_catalog
 set_property ip_output_repo c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
+  C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/sources_1/imports/design_source/hex_driver.sv
   C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/sources_1/new/pins_xor.sv
   C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/sources_1/new/nds_capture_top.sv
 }
+add_files C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/sources_1/bd/design_1/design_1.bd
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_microblaze_0_axi_intc_0/design_1_microblaze_0_axi_intc_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_microblaze_0_axi_intc_0/design_1_microblaze_0_axi_intc_0_clocks.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_microblaze_0_axi_intc_0/design_1_microblaze_0_axi_intc_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_mdm_1_0/design_1_mdm_1_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_mdm_1_0/design_1_mdm_1_0_ooc_trace.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_clk_wiz_1_0/design_1_clk_wiz_1_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_clk_wiz_1_0/design_1_clk_wiz_1_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_clk_wiz_1_0/design_1_clk_wiz_1_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_1_100M_0/design_1_rst_clk_wiz_1_100M_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_1_100M_0/design_1_rst_clk_wiz_1_100M_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_rst_clk_wiz_1_100M_0/design_1_rst_clk_wiz_1_100M_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_axi_uartlite_0_0/design_1_axi_uartlite_0_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_axi_uartlite_0_0/design_1_axi_uartlite_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_axi_uartlite_0_0/design_1_axi_uartlite_0_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_clocks.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_axi_timer_0_0/design_1_axi_timer_0_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_axi_timer_0_0/design_1_axi_timer_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_microblaze_0_2/design_1_microblaze_0_2.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_microblaze_0_2/design_1_microblaze_0_2_ooc_debug.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_microblaze_0_2/design_1_microblaze_0_2_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_dlmb_v10_1/design_1_dlmb_v10_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_ilmb_v10_1/design_1_ilmb_v10_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_dlmb_bram_if_cntlr_1/design_1_dlmb_bram_if_cntlr_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_ilmb_bram_if_cntlr_1/design_1_ilmb_bram_if_cntlr_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_lmb_bram_1/design_1_lmb_bram_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_xbar_3/design_1_xbar_3_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_hdmi_text_controller_0_0/src/blk_mem_gen_0_1/blk_mem_gen_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_hdmi_text_controller_0_0/src/clk_wiz_0/clk_wiz_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_hdmi_text_controller_0_0/src/clk_wiz_0/clk_wiz_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/design_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/bd/design_1/ip/design_1_microblaze_0_2/data/mb_bootloop_le.elf]
+
+read_ip -quiet C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc]
+
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -106,6 +153,8 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/constrs_1/new/constraints.xdc
 set_property used_in_implementation false [get_files C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/constrs_1/new/constraints.xdc]
 
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental C:/Users/Aaro/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/utils_1/imports/synth_1/nds_capture_top.dcp

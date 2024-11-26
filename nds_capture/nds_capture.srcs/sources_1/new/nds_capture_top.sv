@@ -123,19 +123,20 @@ pins_xor pins_xor (
 clk_wiz_0 clk_wiz (
         .clk_out1(clk_25MHz),
         .clk_out2(clk_125MHz),
-        .reset(reset_ah),
+        .reset(reset_rtl_0),
         .locked(locked),
         .clk_in1(Clk)
     );
     
     // vga controller is controlled by the nintendo ds board, so we dont really need it here
+    // ^ this is kinda a lie actually, we need a module to convert from ds to vga before doing anything :(
     
     // we could output the current frame in the hexdrivers maybe? like counting the frames on right
     // and counting the number of seconds on left?
     
     hex_driver HexA (
         .clk(Clk),
-        .reset(reset_ah),
+        .reset(reset_rtl_0),
         .in(),
         .hex_seg(hex_segA),
         .hex_grid(hex_gridA)
@@ -143,25 +144,28 @@ clk_wiz_0 clk_wiz (
     
     hex_driver HexB (
         .clk(Clk),
-        .reset(reset_ah),
+        .reset(reset_rtl_0),
         .in(),
         .hex_seg(hex_segB),
         .hex_grid(hex_gridB)
     );
     //Real Digital VGA to HDMI converter
-    hdmi_tx_0 vga_to_hdmi (
+    /*hdmi_tx_0 vga_to_hdmi (
         //Clocking and Reset
         .pix_clk(clk_25MHz),
         .pix_clkx5(clk_125MHz),
         .pix_clk_locked(locked),
         //Reset is active LOW
-        .rst(reset_ah),
+        .rst(reset_rtl_0),
         //Color and Sync Signals
-        .red({T_R5, T_R4, T_R3, T_R2, T_R1, T_R0}),
-        .green({T_G5, T_G4, T_G3, T_G2, T_G1, T_G0}),
-        .blue({T_B5, T_B4, T_B3, T_B2, T_B1, T_B0}),
+        .red({T_R5, T_R4, T_R3, T_R2, T_R1, T_R0}), // directly inputting the rgb signals can work?
+        // a better idea is storing the data in a frame buffer, and when we have enough pixels
+        // we can output it, although this will probably incur <=1 frame delay between NDS screen
+        // and the hdmi output?
+        .green({T_G5, T_G4, T_G3, T_G2, T_G1, T_G0}), // although, this probably will cause us to
+        .blue({T_B5, T_B4, T_B3, T_B2, T_B1, T_B0}), // output a display image that a wierd res
         .hsync(LS),
-        .vsync(GSP),
+        .vsync(GSP), // this signal can also be used to tell when we can read from the framebuffer?
         .vde(vde), //  we need to make the VDE signal, this should be low when the DCLK is low
         // for more than one display clock cycle?
         // we also have a wierd situation where we may need to scale the NDS screen from 
@@ -181,9 +185,29 @@ clk_wiz_0 clk_wiz (
         .TMDS_CLK_N(hdmi_tmds_clk_n),          
         .TMDS_DATA_P(hdmi_tmds_data_p),         
         .TMDS_DATA_N(hdmi_tmds_data_n)          
-    );
+    );*/
 
-    
+    design_1 block_design (
+        .reset_rtl_0(~reset_rtl_0), //Block designs expect active low reset, all other modules are active high
+        .clk_100MHz(Clk),
+        .usb_spi_miso(usb_spi_miso),
+        .usb_spi_mosi(usb_spi_mosi),
+        .usb_spi_sclk(usb_spi_sclk),
+        .usb_spi_ss(usb_spi_ss),
+        .uart_rtl_0_rxd(uart_rtl_0_rxd),
+        .uart_rtl_0_txd(uart_rtl_0_txd),
+        .red_0({T_R5, T_R4, T_R3, T_R2, T_R1, T_R0}),
+        .green_0({T_G5, T_G4, T_G3, T_G2, T_G1, T_G0}),
+        .blue_0({T_B5, T_B4, T_B3, T_B2, T_B1, T_B0}),
+        .dclk_0(dclk),
+        .ls_0(ls),
+        .gsp_0(gsp),
+        .hdmi_clk_p_0(hdmi_tmds_clk_p),
+        .hdmi_clk_n_0(hdmi_tmds_clk_n),
+        .hdmi_tx_p_0(hdmi_tmds_data_p),
+        .hdmi_tx_n_0(hdmi_tmds_data_n)
+        
+    ); // block design for usb output of the screen, and block memory for the framebuffer
     
     
 endmodule

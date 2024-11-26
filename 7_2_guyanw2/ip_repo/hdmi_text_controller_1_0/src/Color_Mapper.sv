@@ -15,12 +15,9 @@
 //calculate address to determine which data address we should access
 
 module  color_mapper ( input  logic [9:0] DrawX, DrawY,
-//                       input [31:0] slaves[601],
-                       input logic [31:0] slave,
                        input logic [31:0] bram_data, //Data from BRAM port B
-                       input logic [31:0] palette_reg[8], //Register for color palette
-                       input logic [11:0] display_addr,
-                       output logic [3:0]  Red, Green, Blue 
+                       input logic [15:0] display_addr,
+                       output logic [6:0]  Red, Green, Blue 
          );
     
 	 
@@ -33,7 +30,7 @@ module  color_mapper ( input  logic [9:0] DrawX, DrawY,
 	  we have to first cast them from logic to int (signed by default) before they are multiplied). */
 	  
 	  
-	  logic [7:0] font_data;
+	  /*logic [7:0] font_data;
 	  logic [10:0] font_addr;
 	  logic [7:0] sprite_code;
 	  //7.2
@@ -123,9 +120,6 @@ module  color_mapper ( input  logic [9:0] DrawX, DrawY,
 //    if (sprite_index < 601) begin
 //        if (sprite_data) begin
 //            if(IVn) begin 
-//                 Red = slaves[600][12:9]; //invert font_R to background color_R
-//                 Green = slaves[600][8:5];//invert font_G to background color_G
-//                 Blue = slaves[600][4:1]; //invert font_B to background color_B
                  Red = palette_reg[FGD_IDX >> 1][24:21]; 
                  Green = palette_reg[FGD_IDX >> 1][20:17];
                  Blue = palette_reg[FGD_IDX >> 1][16:13]; 
@@ -137,9 +131,6 @@ module  color_mapper ( input  logic [9:0] DrawX, DrawY,
                     end
                 end
             else begin 
-//                 Red = slaves[600][24:21]; // Keep font_R to font color_R
-//                 Green = slaves[600][20:17]; // Keep font_G to font color_G
-//                 Blue = slaves[600][16:13]; // Keep font_B to font color_B
                     if (BKG_IDX%2) begin
                         Red = palette_reg[BKG_IDX>> 1][24:21]; 
                         Green = palette_reg[BKG_IDX>> 1][20:17];
@@ -152,27 +143,8 @@ module  color_mapper ( input  logic [9:0] DrawX, DrawY,
                     end
                  
             end
-//        end
-//        else begin
-//            if(IVn) begin 
-//                 Red = slaves[600][24:21]; //invert background_R to font color_R
-//                 Green = slaves[600][20:17]; //invert background_G to font color_G
-//                 Blue = slaves[600][16:13]; //invert background_B to font color_B
-//             end
-//            else begin 
-//                 Red = slaves[600][12:9]; //Keep Background_R to background color_R
-//                 Green = slaves[600][8:5]; //Keep Background_G to background color_G
-//                 Blue = slaves[600][4:1]; //Keep Background_B to background color_B
-//            end
-//        end
         
                
-            end       
-    //        else begin 
-    //            Red = 4'hf - DrawX[9:6]; 
-    //            Green = 4'hf - DrawX[9:6];
-    //            Blue = 4'hf - DrawX[9:6];
-    //        end      
-//        end 
+            end       */
     
 endmodule

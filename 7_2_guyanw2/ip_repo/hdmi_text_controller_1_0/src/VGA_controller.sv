@@ -31,7 +31,13 @@ module  vga_controller ( input        pixel_clk,        // 50 MHz clock
 									  sync,      // Composite Sync signal.  Active low.  We don't use it in this lab,
 									            //   but the video DAC on the DE2 board requires an input for it.
 						 output [9:0] drawX,     // horizontal coordinate
-						              drawY );   // vertical coordinate
+						              drawY,
+						              output logic [5:0] red, green, blue,
+						              input logic gsp,
+						              output logic bram_addr,
+						              bram_data_out,
+						              bram_en,
+						              bram_rd);   // vertical coordinate
     
     // 800 horizontal pixels indexed 0 to 799
     // 525 vertical pixels indexed 0 to 524
@@ -41,11 +47,16 @@ module  vga_controller ( input        pixel_clk,        // 50 MHz clock
 	 // horizontal pixel and vertical line counters
     logic [9:0] hc, vc;
     
+    // nds pixel count
+    logic [8:0] hc_nds, vc_nds;
+    
 	 // signal indicates if ok to display color for a pixel
 	 logic display;
 	 
     //Disable Composite Sync
     assign sync = 1'b0;
+    
+    
      
    
 	//Runs the horizontal counter  when it resets vertical counter is incremented
@@ -99,15 +110,35 @@ module  vga_controller ( input        pixel_clk,        // 50 MHz clock
 			       vs <= 1'b1;
     end
        
-    //only display pixels between horizontal 0-639 and vertical 0-479 (640x480)
+    //only display pixels between horizontal 192-448 and vertical 144-336 (640x480) for middle of ds display
     //(This signal is registered within the DAC chip, so we can leave it as pure combinational logic here)    
     always_comb
     begin 
-        if ( (hc >= 10'b1010000000) | (vc >= 10'b0111100000) ) 
+        if ( (hc > 9'b111000000) | (hc < 9'b011000000) | (vc < 9'b010010000) | (vc > 9'b101010000) ) 
             display = 1'b0;
         else 
             display = 1'b1;
-    end 
+    end
+    
+    assign bram_addr = (vc_nds * 256) + hc_nds;
+
+always @(posedge pixel_clk) begin
+    if (bram_en && bram_rd) begin
+        {red, green, blue} <= bram_data_out; // Read pixel data from BRAM
+        hc_nds <= hc_nds + 1;
+        if (hc_nds >= 256) begin
+            hc_nds <= 0;
+            vc_nds <= vc_nds + 1;
+        end
+        if (vc_nds >= 192) begin
+            hc_nds <= 0;
+            vc_nds <= 0;
+        end
+    end else begin
+        {red, green, blue} <= 0; // Black screen during blanking
+    end
+end
+    
    
     assign active_nblank = display;    
 
