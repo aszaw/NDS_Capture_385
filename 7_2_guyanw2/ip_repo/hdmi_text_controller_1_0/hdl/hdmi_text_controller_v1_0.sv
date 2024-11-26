@@ -13,7 +13,7 @@ module hdmi_text_controller_v1_0 #
     // Modify parameters as necessary for access of full VRAM range
 
     parameter integer C_AXI_DATA_WIDTH	= 32,
-    parameter integer C_AXI_ADDR_WIDTH	= 14 
+    parameter integer C_AXI_ADDR_WIDTH	= 16
 )
 (
     // Users to add ports here
@@ -22,6 +22,8 @@ module hdmi_text_controller_v1_0 #
     output logic hdmi_clk_p,
     output logic [2:0] hdmi_tx_n,
     output logic [2:0] hdmi_tx_p,
+    input logic [5:0] red, green, blue,
+    input logic dclk, ls, gsp,
 
     // User ports ends
     // Do not modify the ports beyond this line
@@ -56,25 +58,12 @@ module hdmi_text_controller_v1_0 #
     logic locked;
     logic [9:0] drawX, drawY;
     logic hsync, vsync, vde;
-    logic [3:0] red, green, blue;
     logic reset_ah;
-    
-//    logic [31:0] slaves_regs[601];
-    
     assign reset_ah = ~axi_aresetn;
     
-    //Internal Signals for BRAM
-//    logic bram_en;
-//    logic [3:0] braw_we;
-//    logic [C_AXI_ADDR_WIDTH-1:0] bram_addr;
-//    logic [C_AXI_ADDR_WIDTH-1:0] bram_wrdata;
-//    logic [C_AXI_ADDR_WIDTH-1:0] bram_rddata;
     logic [31:0] bram_display_data; //C_AXI_ADDR_WIDTH-1
-    logic [31:0] palette_reg [8];
     
     //Calculate display address for BRAM port B
-    logic [11:0] display_addr;
-    assign display_addr = (drawY / 16) * 40 + drawX / 16;
 
 // Instantiation of Axi Bus Interface AXI
 hdmi_text_controller_v1_0_AXI # ( 
@@ -102,14 +91,8 @@ hdmi_text_controller_v1_0_AXI # (
     .S_AXI_RRESP(axi_rresp),
     .S_AXI_RVALID(axi_rvalid),
     .S_AXI_RREADY(axi_rready),
-    .palette_reg(palette_reg),
     .bram_display_data(bram_display_data),
     .display_addr(display_addr)
-//    .slaves(slaves_regs)
-//    .bram_en(bram_en),
-//    .bram_we(bram_we),
-//    .bram_addr(bram_addr),
-//    .bram_wrdata(bram_wrdata),
 
 );
 
@@ -130,6 +113,7 @@ hdmi_text_controller_v1_0_AXI # (
     
     
         //VGA Sync signal generator
+        logic [5:0] hdmi_red, hdmi_green, hdmi_blue;
     vga_controller vga (
         .pixel_clk(clk_25MHz),
         .reset(reset_ah),
@@ -137,7 +121,11 @@ hdmi_text_controller_v1_0_AXI # (
         .vs(vsync),
         .active_nblank(vde),
         .drawX(drawX),
-        .drawY(drawY)
+        .drawY(drawY),
+        .gsp(gsp),
+        .red(hdmi_red),
+        .green(hdmi_green),
+        .blue(hdmi_blue)
     );  
     
         //Real Digital VGA to HDMI converter
@@ -149,18 +137,18 @@ hdmi_text_controller_v1_0_AXI # (
         //Reset is active LOW
         .rst(reset_ah),
         //Color and Sync Signals
-        .red(red),
-        .green(green),
-        .blue(blue),
+        .red(hdmi_red),
+        .green(hdmi_green),
+        .blue(hdmi_blue),
         .hsync(hsync),
         .vsync(vsync),
         .vde(vde),
         
-        //aux Data (unused)
+        /*aux Data (unused)
         .aux0_din(4'b0),
         .aux1_din(4'b0),
         .aux2_din(4'b0),
-        .ade(1'b0),
+        .ade(1'b0),*/
         
         //Differential outputs
         .TMDS_CLK_P(hdmi_clk_p),          
@@ -168,21 +156,25 @@ hdmi_text_controller_v1_0_AXI # (
         .TMDS_DATA_P(hdmi_tx_p),         
         .TMDS_DATA_N(hdmi_tx_n)          
     );
-
-
-    //Color Mapper Module   
-    color_mapper color_instance(
-        .DrawX(drawX),
-        .DrawY(drawY),
-        .Red(red),
-        .Green(green),
-        .Blue(blue),
-        .bram_data(bram_display_data),
-        .display_addr(display_addr),
-        .palette_reg(palette_reg)
-//        .slaves(slaves_regs)
-        );
      
-     
+     nds_bram_write bram_write(
+        .red(red),
+        .green(green),
+        .blue(blue),
+        .dclk(dclk),
+        .ls(ls),
+        .gsp(gsp),
+        .reset(reset_ah),
+        .clk(axi_aclk), 
+        .S_AXI_AWADDR(S_AXI_AWADDR),
+        .S_AXI_AWVALID(S_AXI_AWVALID),
+        .S_AXI_AWREADY(S_AXI_AWREADY),
+        .S_AXI_WDATA(S_AXI_WDATA),
+        .S_AXI_WVALID(S_AXI_WVALID),
+        .S_AXI_WREADY(S_AXI_WREADY),
+        .S_AXI_WSTRB(S_AXI_WSTRB),
+        .S_AXI_BREADY(S_AXI_BREADY)
+        
+     );
      
 endmodule
