@@ -1,77 +1,150 @@
-module color_mapper (
-    input logic [9:0] DrawX, DrawY,
-    output logic [3:0] Red, Green, Blue,
-    output logic [10:0] axi_addr,
-    input logic [31:0] axi_data,
-    input logic [31:0] control_data,
-    input logic axi_aclk, reset
-);
+//-------------------------------------------------------------------------
+//    Color_Mapper.sv                                                    --
+//    Stephen Kempf                                                      --
+//    3-1-06                                                             --
+//                                                                       --
+//    Modified by David Kesler  07-16-2008                               --
+//    Translated by Joe Meng    07-07-2013                               --
+//    Modified by Zuofu Cheng   08-19-2023                               --
+//                                                                       --
+//    Fall 2023 Distribution                                             --
+//                                                                       --
+//    For use with ECE 385 USB + HDMI                                    --
+//    University of Illinois ECE Department                              --
+//-------------------------------------------------------------------------
+//calculate address to determine which data address we should access
 
-    logic [31:0] vram_data;
-    logic [31:0] special_data;
-    logic [10:0] read_addr;
-    logic [7:0] read_data;
-    logic inverse, pixel_state;
-    static int pixel;
+module  color_mapper ( input  logic [9:0] DrawX, DrawY,
+                       input logic [31:0] bram_data, //Data from BRAM port B
+                       input logic [15:0] display_addr,
+                       output logic [6:0]  Red, Green, Blue 
+         );
     
-    font_rom fontrom(.addr(read_addr), .data(read_data));
+	 
+ /* Old Ball: Generated square box by checking if the current pixel is within a square of length
+    2*BallS, centered at (BallX, BallY).  Note that this requires unsigned comparisons.
+
+     New Ball: Generates (pixelated) circle by using the standard circle formula.  Note that while 
+     this single line is quite powerful descriptively, it causes the synthesis tool to use up three
+     of the 120 available multipliers on the chip!  Since the multiplicants are required to be signed,
+	  we have to first cast them from logic to int (signed by default) before they are multiplied). */
+	  
+	  
+	  /*logic [7:0] font_data;
+	  logic [10:0] font_addr;
+	  logic [7:0] sprite_code;
+	  //7.2
+	  logic [3:0] FGD_IDX;
+	  logic [3:0] BKG_IDX;
+	  logic IVn;
+	  logic [11:0] reg_addr;
+	  //calculate reg index
+//    logic [9:0] register; 
+//    assign register = (DrawY / 16) * 20 + DrawX / 32;
+    logic ch_chose;
+    assign ch_chose = DrawX[3];//(DrawX >> 3) % 2;
+//    logic sprite_data = slaves[sprite_index][ch_chose];
+ 
+	         always_comb
+	          case (ch_chose) 
+	               1'b0: 
+	               begin
+//	                      font_data = slaves[sprite_index][7];
+
+//	                      sprite_code = slaves[register][6:0];
+//                        IVn = slaves[register][7];
+	                      sprite_code = bram_data[14:8];
+	                      IVn = bram_data[15];
+	                      FGD_IDX = bram_data[7:4];
+	                      BKG_IDX = bram_data[3:0];
+	                      end
+	               1'b1: 
+	               begin
+//	                      font_data = slaves[sprite_index][15];
+
+//	                      sprite_code = slaves[register][14:8];
+//	                      IVn = slaves[register][15];
+                          sprite_code = bram_data[30:24];
+	                      IVn = bram_data[31];
+	                      FGD_IDX = bram_data[23:20];
+	                      BKG_IDX = bram_data[19:16];
+	                      end
+//	               2'b10: 
+//	               begin
+////	                       font_data = slaves[sprite_index][23];
+
+////	                       sprite_code = slaves[register][22:16];
+////	                       IVn = slaves[register][23];
+//	                       sprite_code = bram_data[22:16];
+//	                       IVn = bram_data[23];
+//	                       end
+//	               2'b11: 
+//	               begin
+////	                      font_data = slaves[sprite_index][31];
+////	                      font_addr = (slaves[sprite_index][30:24] * 16) + (DrawY % 16);
+
+////                        sprite_code = slaves[register][30:24];
+////                        IVn = slaves[register][31];
+//                          sprite_code = bram_data[30:24];
+//                          IVn = bram_data[31];
+//	                      end
+	           endcase
+	           
+	          assign font_addr = sprite_code[6:0]*16 + (DrawY % 16);
+	          
+	          
+	          
+	//Instantiat font_rom
+	font_rom dict( .addr(font_addr), 
+	           .data(font_data)
+	           ); 
+	           
+    logic pixel;
+    assign pixel = font_data[7-DrawX%8];
     
-    always_comb begin
-        int regX = DrawX / 32;
-        int regY = DrawY / 16; 
-        int register = (regX + (regY * 20)); // calculate the register row major order
-        
-        int first = DrawX % 32; 
-        int glyphNum = first / 8; // this is fine for the glyph in the register
-        int column = DrawX % 8; // find the actual pixel we need to get from data
-        int row = DrawY % 16; // also get the row
-        
-        axi_addr = register;
-        vram_data = axi_data;
-        
-        case (glyphNum)
-            0: begin
-                read_addr = {vram_data[30:24] * 16 + (row)};
-                inverse = vram_data[31];
+    logic check_ground;
+    assign check_ground = pixel ^ IVn;
+//    assign reg_addr = palette_reg + ;
+    
+    always_comb
+    begin:RGB_Display
+    //chose register:
+    
+    
+//    if (IVn) begin
+//        logic [23:20] 
+//    end
+    if (check_ground == 1'b0) begin
+        //if  bkg idx % 2 == 0 
+        if (FGD_IDX%2) begin
+//    if (sprite_index < 601) begin
+//        if (sprite_data) begin
+//            if(IVn) begin 
+                 Red = palette_reg[FGD_IDX >> 1][24:21]; 
+                 Green = palette_reg[FGD_IDX >> 1][20:17];
+                 Blue = palette_reg[FGD_IDX >> 1][16:13]; 
+                 end 
+                 else begin
+                        Red = palette_reg[FGD_IDX >> 1][12:9]; 
+                        Green = palette_reg[FGD_IDX >> 1][8:5];
+                        Blue = palette_reg[FGD_IDX >> 1][4:1]; 
+                    end
+                end
+            else begin 
+                    if (BKG_IDX%2) begin
+                        Red = palette_reg[BKG_IDX>> 1][24:21]; 
+                        Green = palette_reg[BKG_IDX>> 1][20:17];
+                        Blue = palette_reg[BKG_IDX>> 1][16:13]; 
+                    end
+                    else begin
+                        Red = palette_reg[BKG_IDX>> 1][12:9]; 
+                        Green = palette_reg[BKG_IDX>> 1][8:5];
+                        Blue = palette_reg[BKG_IDX>> 1][4:1]; 
+                    end
+                 
             end
-            1: begin
-                read_addr = {vram_data[23:16] * 16 + (row)};
-                inverse = vram_data[23];
-            end
-            2: begin
-                read_addr = {vram_data[14:8] * 16 + (row)};
-                inverse = vram_data[15];
-            end
-            3: begin
-                read_addr = {vram_data[6:0] * 16 + (row)};
-                inverse = vram_data[7];
-            end
-            default: begin
-                read_addr = 32'h0; // Default case
-                inverse = 1'b0;
-            end
-        endcase
         
-        pixel = read_data[7-column];
-        
-        if (pixel & inverse) begin
-            Red = control_data[12:9];
-            Green = control_data[8:5];
-            Blue = control_data[4:1];
-        end else if (pixel & ~inverse) begin
-            Red = control_data[24:21];
-            Green = control_data[20:17];
-            Blue = control_data[16:13];
-        end else if (~pixel & inverse) begin
-            Red = control_data[24:21];
-            Green = control_data[20:17];
-            Blue = control_data[16:13];
-        end else if (~pixel & ~inverse) begin
-            Red = control_data[12:9];
-            Green = control_data[8:5];
-            Blue = control_data[4:1];
-        end
-        
-        end
+               
+            end       */
     
 endmodule

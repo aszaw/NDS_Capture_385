@@ -1,10 +1,10 @@
 // Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-// Date        : Wed Nov  6 19:12:19 2024
+// Date        : Sun Nov 24 19:09:48 2024
 // Host        : DESKTOP-0G38QBS running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
-//               c:/Users/Aaro/Documents/GitHub/ece385/ip_repo/hdmi_text_controller_1_0/src/blk_mem_gen_0_1/blk_mem_gen_0_stub.v
+//               c:/Users/Aaro/Desktop/385/NDS_Capture_385/7_2_guyanw2/ip_repo/hdmi_text_controller_1_0/src/blk_mem_gen_0_1/blk_mem_gen_0_stub.v
 // Design      : blk_mem_gen_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7s50csga324-1
@@ -16,17 +16,17 @@
 (* x_core_info = "blk_mem_gen_v8_4_5,Vivado 2022.2" *)
 module blk_mem_gen_0(clka, ena, wea, addra, dina, douta, clkb, enb, web, addrb, 
   dinb, doutb)
-/* synthesis syn_black_box black_box_pad_pin="clka,ena,wea[3:0],addra[10:0],dina[31:0],douta[31:0],clkb,enb,web[3:0],addrb[10:0],dinb[31:0],doutb[31:0]" */;
+/* synthesis syn_black_box black_box_pad_pin="clka,ena,wea[0:0],addra[15:0],dina[31:0],douta[31:0],clkb,enb,web[0:0],addrb[15:0],dinb[31:0],doutb[31:0]" */;
   input clka;
   input ena;
-  input [3:0]wea;
-  input [10:0]addra;
+  input [0:0]wea;
+  input [15:0]addra;
   input [31:0]dina;
   output [31:0]douta;
   input clkb;
   input enb;
-  input [3:0]web;
-  input [10:0]addrb;
+  input [0:0]web;
+  input [15:0]addrb;
   input [31:0]dinb;
   output [31:0]doutb;
 endmodule

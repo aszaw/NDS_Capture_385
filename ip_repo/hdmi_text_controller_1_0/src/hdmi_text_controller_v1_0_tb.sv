@@ -10,7 +10,7 @@
 //simulation video image for testing
 
 `define SIM_VIDEO //Comment out to simulate AXI bus only
-                    //Uncomment to simulate entire screen and write BMP (slow)
+//                    Uncomment to simulate entire screen and write BMP (slow)
 
 module hdmi_text_controller_tb();
 
@@ -61,15 +61,6 @@ module hdmi_text_controller_tb();
     logic [23:0] bitmap [BMP_WIDTH][BMP_HEIGHT];
 
     integer i,j; //use integers for loop indices, etc
-    
-    logic clk_25MHz;
-logic clk_125MHz;
-logic clk;
-logic locked;
-logic hsync, vsync, vde;
-logic [3:0] red, green, blue;
-logic reset_ah;
-    
 
 	//Instantiation of DUT (HDMI TEXT_CONTROLLER) IP
 	hdmi_text_controller_v1_0 # (
@@ -102,21 +93,7 @@ logic reset_ah;
 		.axi_rdata(read_data),
 		.axi_rresp(read_resp),
 		.axi_rvalid(read_data_valid),
-		.axi_rready(read_data_ready),
-		
-		.clk_25MHz(clk_25MHz),
-    .clk_125MHz(clk_125MHz),
-    .clk(clk),
-    .locked(locked),
-    .drawX(drawX),
-    .drawY(drawY),
-    .hsync(hsync),
-    .vsync(vsync),
-    .vde(vde),
-    .red(red),
-    .green(green),
-    .blue(blue),
-    .reset_ah(reset_ah)
+		.axi_rready(read_data_ready)
 	);
 	
 	initial begin: CLOCK_INITIALIZATION
@@ -134,19 +111,19 @@ logic reset_ah;
     //the pixel clock, assign pixel_clk = hdmi_text_controller_v1_0_inst.clk_25MHz
     
     // Red Green and Blue values respectively - these come from your draw logic
-    assign pixel_rgb[0] = hdmi_text_controller_v1_0_inst.red;
-    assign pixel_rgb[1] = hdmi_text_controller_v1_0_inst.green;
-    assign pixel_rgb[2] = hdmi_text_controller_v1_0_inst.blue;
+     assign pixel_rgb[0] = hdmi_text_controller_v1_0_inst.red;
+     assign pixel_rgb[1] = hdmi_text_controller_v1_0_inst.green;
+     assign pixel_rgb[2] = hdmi_text_controller_v1_0_inst.blue;
     
     // Pixel clock, hs, vs, and vde (!blank) - these come from your internal VGA module
-    assign pixel_clk = hdmi_text_controller_v1_0_inst.clk_25MHz;
-    assign pixel_hs = hdmi_text_controller_v1_0_inst.hsync;
-    assign pixel_vs = hdmi_text_controller_v1_0_inst.vsync;
-    assign pixel_vde = hdmi_text_controller_v1_0_inst.vde;
+     assign pixel_clk = hdmi_text_controller_v1_0_inst.clk_25MHz;
+     assign pixel_hs = hdmi_text_controller_v1_0_inst.hsync;
+     assign pixel_vs = hdmi_text_controller_v1_0_inst.vsync;
+     assign pixel_vde = hdmi_text_controller_v1_0_inst.vde;
     
     // DrawX and DrawY - these come from your internal VGA module
-    assign drawX = hdmi_text_controller_v1_0_inst.drawX;
-    assign drawY = hdmi_text_controller_v1_0_inst.drawY;
+     assign drawX = hdmi_text_controller_v1_0_inst.drawX;
+     assign drawY = hdmi_text_controller_v1_0_inst.drawY;
    
     // BMP writing task, based off work from @BrianHGinc:
     // https://github.com/BrianHGinc/SystemVerilog-TestBench-BPM-picture-generator
@@ -251,28 +228,29 @@ logic reset_ah;
     //Note the read handshake process is simpler than the write
     task axi_read (input logic [31:0] addr, output logic [31:0] data);
         begin
-            #3 read_addr <= addr;
-            read_addr_valid <= 1'b1;
-            read_data_ready <= 1'b1;
-    
-            wait(read_addr_ready);
-                
-            @(posedge aclk);
-            if (read_addr_ready && read_addr_valid) begin
-            read_addr_valid <= 1'b0;
-            read_addr_ready <= 1'b0;
-            end
-            
-            wait(read_data_valid);
-            
-            @(posedge aclk);
-            data <= read_data;
-            
-            read_data_ready <= 1'b0;
-        
-            wait(read_data_valid == 1'b0);
-    
-        end  
+            // Step 1: Set the read address on the bus 
+            read_addr <= addr; 
+            read_addr_valid <= 1'b1; // Indicate address is valid 
+            read_data_ready <= 1'b1; // Indicate ready to accept data 
+ 
+            // Step 2: Wait for the read address ready signal 
+            wait(read_addr_ready); 
+ 
+            // Step 3: Deassert the read address valid signal 
+            @(posedge aclk); 
+            read_addr_valid <= 0; 
+ 
+            // Step 4: Wait for the read data valid signal 
+            wait(read_data_valid); 
+ 
+            // Step 5: Capture the read data 
+            @(posedge aclk); 
+            data <= read_data; 
+ 
+            // Step 6: Indicate that the read data has been accepted 
+            read_data_ready <= 0; 
+            // End of read transaction
+        end
     endtask;
   
   
@@ -284,14 +262,23 @@ logic reset_ah;
         
         //remember AXI addresses are BYTE addresses!
         //This writes something into the Control Register so that we're not simulating a black screen
-        repeat (4) @(posedge aclk) axi_write((600*4), 32'h001F6000); //write control reg to set foreground and background
+//        repeat (4) @(posedge aclk) axi_write((600*4), 32'h001F6000); //write control reg to set foreground and background
+        repeat (4) @(posedge aclk) axi_write((1*4), 32'h01EEF1FE);
+        repeat (4) @(posedge aclk) axi_write((2*4), 32'h01EEF1FE);
+        repeat (4) @(posedge aclk) axi_write((3*4), 32'h01EEF1FE);
+        repeat (4) @(posedge aclk) axi_write((4*4), 32'h01EEF1FE);
+        repeat (4) @(posedge aclk) axi_write((5*4), 32'h01EEF1FE);
+        repeat (4) @(posedge aclk) axi_write((6*4), 32'h01EEF1FE);
+        repeat (4) @(posedge aclk) axi_write((7*4), 32'h01EEF1FE);
+        repeat (4) @(posedge aclk) axi_write((8*4), 32'h01EEF1FE);
+        
         
         //Write into every one of the 600 VRAM registers, note that this is different than what the driver C code does
         //because the testbench axi_write task only generates aligned (full 32-bit) AXI writes (e.g. write_strb is always F)
         //The C code on the MicroBlaze expects to be able to do byte and halfword (16-bit) writes, therefore if the
         //simulation works but the checksum does not pass in the hardware, check handling of write_strb. 
         for(i=0; i < 600; i++) begin 
-		  repeat (4) @(posedge aclk) axi_write(4*i, i);
+		  repeat (4) @(posedge aclk) axi_write(4*i, 32'h02FF02EF); //  i);
         end
         
         //The following is the readback routine. It tests that your AXI IP is capable of reading back all 601

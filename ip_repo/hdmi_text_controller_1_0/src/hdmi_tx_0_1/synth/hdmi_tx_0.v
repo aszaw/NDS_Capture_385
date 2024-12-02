@@ -65,10 +65,6 @@ module hdmi_tx_0 (
   hsync,
   vsync,
   vde,
-  aux0_din,
-  aux1_din,
-  aux2_din,
-  ade,
   TMDS_CLK_P,
   TMDS_CLK_N,
   TMDS_DATA_P,
@@ -85,16 +81,12 @@ input wire pix_clk_locked;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME rst, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 rst RST" *)
 input wire rst;
-input wire [3 : 0] red;
-input wire [3 : 0] green;
-input wire [3 : 0] blue;
+input wire [5 : 0] red;
+input wire [5 : 0] green;
+input wire [5 : 0] blue;
 input wire hsync;
 input wire vsync;
 input wire vde;
-input wire [3 : 0] aux0_din;
-input wire [3 : 0] aux1_din;
-input wire [3 : 0] aux2_din;
-input wire ade;
 (* X_INTERFACE_INFO = "xilinx.com:interface:hdmi:2.0 hdmi_tx TMDS_CLK_P" *)
 output wire TMDS_CLK_P;
 (* X_INTERFACE_INFO = "xilinx.com:interface:hdmi:2.0 hdmi_tx TMDS_CLK_N" *)
@@ -105,10 +97,10 @@ output wire [2 : 0] TMDS_DATA_P;
 output wire [2 : 0] TMDS_DATA_N;
 
   hdmi_tx_v1_0 #(
-    .MODE("HDMI"),
-    .C_RED_WIDTH(4),
-    .C_GREEN_WIDTH(4),
-    .C_BLUE_WIDTH(4)
+    .MODE("DVI"),
+    .C_RED_WIDTH(6),
+    .C_GREEN_WIDTH(6),
+    .C_BLUE_WIDTH(6)
   ) inst (
     .pix_clk(pix_clk),
     .pix_clkx5(pix_clkx5),
@@ -120,10 +112,10 @@ output wire [2 : 0] TMDS_DATA_N;
     .hsync(hsync),
     .vsync(vsync),
     .vde(vde),
-    .aux0_din(aux0_din),
-    .aux1_din(aux1_din),
-    .aux2_din(aux2_din),
-    .ade(ade),
+    .aux0_din(4'B0),
+    .aux1_din(4'B0),
+    .aux2_din(4'B0),
+    .ade(1'B0),
     .TMDS_CLK_P(TMDS_CLK_P),
     .TMDS_CLK_N(TMDS_CLK_N),
     .TMDS_DATA_P(TMDS_DATA_P),
