@@ -59,16 +59,12 @@ hdmi_tx_0 your_instance_name (
   .pix_clkx5(pix_clkx5),            // input wire pix_clkx5
   .pix_clk_locked(pix_clk_locked),  // input wire pix_clk_locked
   .rst(rst),                        // input wire rst
-  .red(red),                        // input wire [3 : 0] red
-  .green(green),                    // input wire [3 : 0] green
-  .blue(blue),                      // input wire [3 : 0] blue
+  .red(red),                        // input wire [5 : 0] red
+  .green(green),                    // input wire [5 : 0] green
+  .blue(blue),                      // input wire [5 : 0] blue
   .hsync(hsync),                    // input wire hsync
   .vsync(vsync),                    // input wire vsync
   .vde(vde),                        // input wire vde
-  .aux0_din(aux0_din),              // input wire [3 : 0] aux0_din
-  .aux1_din(aux1_din),              // input wire [3 : 0] aux1_din
-  .aux2_din(aux2_din),              // input wire [3 : 0] aux2_din
-  .ade(ade),                        // input wire ade
   .TMDS_CLK_P(TMDS_CLK_P),          // output wire TMDS_CLK_P
   .TMDS_CLK_N(TMDS_CLK_N),          // output wire TMDS_CLK_N
   .TMDS_DATA_P(TMDS_DATA_P),        // output wire [2 : 0] TMDS_DATA_P

@@ -1,10 +1,10 @@
 // Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-// Date        : Wed Oct 30 01:52:45 2024
-// Host        : DESKTOP-354B4V3 running 64-bit major release  (build 9200)
+// Date        : Tue Oct 29 20:51:33 2024
+// Host        : ECEB-3070-01 running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
-//               c:/Users/Aaro/Documents/GitHub/ece385/ip_repo/hdmi_text_controller_1_0/src/hdmi_tx_0/hdmi_tx_0_stub.v
+//               d:/workspace_vivado/ip_repo/hdmi_text_controller_1_0/src/hdmi_tx_0/hdmi_tx_0_stub.v
 // Design      : hdmi_tx_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7s50csga324-1
