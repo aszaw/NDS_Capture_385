@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date             : Wed Dec 11 01:09:55 2024
+| Date             : Thu Dec 12 01:29:40 2024
 | Host             : DESKTOP-0G38QBS running 64-bit major release  (build 9200)
 | Command          : report_power -file mb_usb_hdmi_top_power_routed.rpt -pb mb_usb_hdmi_top_power_summary_routed.pb -rpx mb_usb_hdmi_top_power_routed.rpx
 | Design           : mb_usb_hdmi_top
@@ -33,7 +33,7 @@ Table of Contents
 | Total On-Chip Power (W)  | 0.462        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.386        |
+| Dynamic (W)              | 0.387        |
 | Device Static (W)        | 0.076        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 82.7         |
@@ -53,18 +53,17 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.023 |       14 |       --- |             --- |
-| Slice Logic              |     0.004 |    10491 |       --- |             --- |
-|   LUT as Logic           |     0.003 |     3371 |     32600 |           10.34 |
+| Slice Logic              |     0.003 |    10675 |       --- |             --- |
+|   LUT as Logic           |     0.003 |     3481 |     32600 |           10.68 |
 |   LUT as Distributed RAM |    <0.001 |      120 |      9600 |            1.25 |
-|   Register               |    <0.001 |     4411 |     65200 |            6.77 |
-|   CARRY4                 |    <0.001 |      121 |      8150 |            1.48 |
-|   LUT as Shift Register  |    <0.001 |      264 |      9600 |            2.75 |
+|   Register               |    <0.001 |     4455 |     65200 |            6.83 |
+|   CARRY4                 |    <0.001 |      124 |      8150 |            1.52 |
 |   F7/F8 Muxes            |    <0.001 |      232 |     32600 |            0.71 |
+|   LUT as Shift Register  |    <0.001 |      268 |      9600 |            2.79 |
 |   Others                 |     0.000 |     1016 |       --- |             --- |
-| Signals                  |     0.006 |     7299 |       --- |             --- |
+| Signals                  |     0.007 |     7476 |       --- |             --- |
 | Block RAM                |     0.005 |       64 |        75 |           85.33 |
 | MMCM                     |     0.212 |        2 |         5 |           40.00 |
-| DSPs                     |    <0.001 |        1 |       120 |            0.83 |
 | I/O                      |     0.137 |       61 |       210 |           29.05 |
 | Static Power             |     0.076 |          |           |                 |
 | Total                    |     0.462 |          |           |                 |
@@ -155,7 +154,7 @@ Table of Contents
 +----------------------------+-----------+
 | Name                       | Power (W) |
 +----------------------------+-----------+
-| mb_usb_hdmi_top            |     0.386 |
+| mb_usb_hdmi_top            |     0.387 |
 |   dbg_hub                  |     0.003 |
 |     inst                   |     0.003 |
 |       BSCANID.u_xsdbm_id   |     0.003 |

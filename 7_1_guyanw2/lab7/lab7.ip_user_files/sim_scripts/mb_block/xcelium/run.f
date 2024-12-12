@@ -72,6 +72,12 @@
 -makelib xcelium_lib/xil_defaultlib \
   "../../../bd/mb_block/ip/mb_block_axi_uartlite_0_2/sim/mb_block_axi_uartlite_0_2.vhd" \
 -endlib
+-makelib xcelium_lib/microblaze_v11_0_10 \
+  "../../../../lab7.gen/sources_1/bd/mb_block/ipshared/1f7b/hdl/microblaze_v11_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/xil_defaultlib \
+  "../../../bd/mb_block/ip/mb_block_microblaze_0_1/sim/mb_block_microblaze_0_1.vhd" \
+-endlib
 -makelib xcelium_lib/blk_mem_gen_v8_4_5 \
   "../../../../lab7.gen/sources_1/bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/src/blk_mem_gen_0_12/simulation/blk_mem_gen_v8_4.v" \
 -endlib
@@ -86,16 +92,10 @@
   "../../../bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/src/clk_wiz_0_2/clk_wiz_0.v" \
 -endlib
 -makelib xcelium_lib/xil_defaultlib -sv \
-  "../../../bd/mb_block/ipshared/d0e3/src/VGA_controller.sv" \
+  "../../../bd/mb_block/ipshared/5fd6/src/VGA_controller.sv" \
   "../../../../lab7.gen/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/sources_1/new/nds_bram.sv" \
-  "../../../../lab7.gen/sources_1/bd/mb_block/ipshared/d0e3/src/hdmi_text_controller_v1_0.sv" \
+  "../../../../lab7.gen/sources_1/bd/mb_block/ipshared/5fd6/src/hdmi_text_controller_v1_0.sv" \
   "../../../bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/sim/mb_block_hdmi_text_controller_0_2.sv" \
--endlib
--makelib xcelium_lib/microblaze_v11_0_10 \
-  "../../../../lab7.gen/sources_1/bd/mb_block/ipshared/1f7b/hdl/microblaze_v11_0_vh_rfs.vhd" \
--endlib
--makelib xcelium_lib/xil_defaultlib \
-  "../../../bd/mb_block/ip/mb_block_microblaze_0_1/sim/mb_block_microblaze_0_1.vhd" \
 -endlib
 -makelib xcelium_lib/xil_defaultlib \
   "../../../bd/mb_block/sim/mb_block.v" \

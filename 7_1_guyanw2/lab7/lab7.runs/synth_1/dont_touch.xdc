@@ -27,10 +27,10 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==mb_block_cl
 # IP: bd/mb_block/ip/mb_block_axi_uartlite_0_2/mb_block_axi_uartlite_0_2.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==mb_block_axi_uartlite_0_2 || ORIG_REF_NAME==mb_block_axi_uartlite_0_2} -quiet] -quiet
 
-# IP: bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/mb_block_hdmi_text_controller_0_2.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==mb_block_hdmi_text_controller_0_2 || ORIG_REF_NAME==mb_block_hdmi_text_controller_0_2} -quiet] -quiet
-
 # IP: bd/mb_block/ip/mb_block_microblaze_0_1/mb_block_microblaze_0_1.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==mb_block_microblaze_0_1 || ORIG_REF_NAME==mb_block_microblaze_0_1} -quiet] -quiet
+
+# IP: bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/mb_block_hdmi_text_controller_0_2.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==mb_block_hdmi_text_controller_0_2 || ORIG_REF_NAME==mb_block_hdmi_text_controller_0_2} -quiet] -quiet
 
 # XDC: c:/Users/Aaro/Desktop/385/NDS_Capture_385/7_1_guyanw2/lab7/lab7.gen/sources_1/bd/mb_block/mb_block_ooc.xdc

@@ -9,7 +9,7 @@
   "../../../ipstatic/simulation/blk_mem_gen_v8_4.v" \
 -endlib
 -makelib xcelium_lib/xil_defaultlib \
-  "../../../../../../../../../../../Documents/GitHub/ece385/ip_repo_asz/hdmi_text_controller_1_0/src/blk_mem_gen_0_12/sim/blk_mem_gen_0.v" \
+  "../../../../hdmi_text_controller_thissss_v1_0_project.gen/sources_1/ip/blk_mem_gen_0/sim/blk_mem_gen_0.v" \
 -endlib
 -makelib xcelium_lib/xil_defaultlib \
   glbl.v

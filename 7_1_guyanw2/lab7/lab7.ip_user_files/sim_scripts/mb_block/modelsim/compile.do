@@ -17,8 +17,8 @@ vlib modelsim_lib/msim/proc_sys_reset_v5_0_13
 vlib modelsim_lib/msim/lib_pkg_v1_0_2
 vlib modelsim_lib/msim/lib_srl_fifo_v1_0_2
 vlib modelsim_lib/msim/axi_uartlite_v2_0_31
-vlib modelsim_lib/msim/blk_mem_gen_v8_4_5
 vlib modelsim_lib/msim/microblaze_v11_0_10
+vlib modelsim_lib/msim/blk_mem_gen_v8_4_5
 
 vmap xpm modelsim_lib/msim/xpm
 vmap generic_baseblocks_v2_1_0 modelsim_lib/msim/generic_baseblocks_v2_1_0
@@ -36,8 +36,8 @@ vmap proc_sys_reset_v5_0_13 modelsim_lib/msim/proc_sys_reset_v5_0_13
 vmap lib_pkg_v1_0_2 modelsim_lib/msim/lib_pkg_v1_0_2
 vmap lib_srl_fifo_v1_0_2 modelsim_lib/msim/lib_srl_fifo_v1_0_2
 vmap axi_uartlite_v2_0_31 modelsim_lib/msim/axi_uartlite_v2_0_31
-vmap blk_mem_gen_v8_4_5 modelsim_lib/msim/blk_mem_gen_v8_4_5
 vmap microblaze_v11_0_10 modelsim_lib/msim/microblaze_v11_0_10
+vmap blk_mem_gen_v8_4_5 modelsim_lib/msim/blk_mem_gen_v8_4_5
 
 vlog -work xpm  -incr -mfcu  -sv "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ipshared/ec67/hdl" "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ipshared/7698" "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/src/clk_wiz_0_2" \
 "C:/Xilinx2022/Vivado/2022.2/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv" \
@@ -113,6 +113,12 @@ vcom -work axi_uartlite_v2_0_31  -93  \
 vcom -work xil_defaultlib  -93  \
 "../../../bd/mb_block/ip/mb_block_axi_uartlite_0_2/sim/mb_block_axi_uartlite_0_2.vhd" \
 
+vcom -work microblaze_v11_0_10  -93  \
+"../../../../lab7.gen/sources_1/bd/mb_block/ipshared/1f7b/hdl/microblaze_v11_0_vh_rfs.vhd" \
+
+vcom -work xil_defaultlib  -93  \
+"../../../bd/mb_block/ip/mb_block_microblaze_0_1/sim/mb_block_microblaze_0_1.vhd" \
+
 vlog -work blk_mem_gen_v8_4_5  -incr -mfcu  "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ipshared/ec67/hdl" "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ipshared/7698" "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/src/clk_wiz_0_2" \
 "../../../../lab7.gen/sources_1/bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/src/blk_mem_gen_0_12/simulation/blk_mem_gen_v8_4.v" \
 
@@ -127,16 +133,10 @@ vlog -work xil_defaultlib  -incr -mfcu  "+incdir+../../../../lab7.gen/sources_1/
 "../../../bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/src/clk_wiz_0_2/clk_wiz_0.v" \
 
 vlog -work xil_defaultlib  -incr -mfcu  -sv "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ipshared/ec67/hdl" "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ipshared/7698" "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/src/clk_wiz_0_2" \
-"../../../bd/mb_block/ipshared/d0e3/src/VGA_controller.sv" \
+"../../../bd/mb_block/ipshared/5fd6/src/VGA_controller.sv" \
 "../../../../lab7.gen/Desktop/385/NDS_Capture_385/nds_capture/nds_capture.srcs/sources_1/new/nds_bram.sv" \
-"../../../../lab7.gen/sources_1/bd/mb_block/ipshared/d0e3/src/hdmi_text_controller_v1_0.sv" \
+"../../../../lab7.gen/sources_1/bd/mb_block/ipshared/5fd6/src/hdmi_text_controller_v1_0.sv" \
 "../../../bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/sim/mb_block_hdmi_text_controller_0_2.sv" \
-
-vcom -work microblaze_v11_0_10  -93  \
-"../../../../lab7.gen/sources_1/bd/mb_block/ipshared/1f7b/hdl/microblaze_v11_0_vh_rfs.vhd" \
-
-vcom -work xil_defaultlib  -93  \
-"../../../bd/mb_block/ip/mb_block_microblaze_0_1/sim/mb_block_microblaze_0_1.vhd" \
 
 vlog -work xil_defaultlib  -incr -mfcu  "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ipshared/ec67/hdl" "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ipshared/7698" "+incdir+../../../../lab7.gen/sources_1/bd/mb_block/ip/mb_block_hdmi_text_controller_0_2/src/clk_wiz_0_2" \
 "../../../bd/mb_block/sim/mb_block.v" \

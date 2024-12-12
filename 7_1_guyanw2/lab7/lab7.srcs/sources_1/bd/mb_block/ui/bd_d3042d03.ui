@@ -68,11 +68,11 @@ preplace netloc rst_clk_wiz_1_100M_mb_reset 1 0 5 -70 -10 N -10 N -10 1180 -10 1
 preplace netloc rst_clk_wiz_1_100M_peripheral_aresetn 1 3 2 1200 -20 1560
 preplace netloc axi_uartlite_0_UART 1 5 1 1970 -150n
 preplace netloc hdmi_text_controller_0_HDMI 1 5 1 1960 50n
+preplace netloc microblaze_0_M_AXI_DP 1 1 3 460J 50 NJ 50 N
 preplace netloc microblaze_0_axi_periph_M01_AXI 1 4 1 1530 -160n
 preplace netloc microblaze_0_axi_periph_M02_AXI 1 4 1 1600 -20n
-preplace netloc microblaze_0_intc_axi 1 4 1 1590 130n
 preplace netloc microblaze_0_debug 1 0 3 -50 10 NJ 10 730
-preplace netloc microblaze_0_M_AXI_DP 1 1 3 460J 50 NJ 50 N
+preplace netloc microblaze_0_intc_axi 1 4 1 1590 130n
 levelinfo -pg 1 -100 220 620 1010 1390 1840 1990
 pagesize -pg 1 -db -bbox -sgen -230 -510 2100 870
 "

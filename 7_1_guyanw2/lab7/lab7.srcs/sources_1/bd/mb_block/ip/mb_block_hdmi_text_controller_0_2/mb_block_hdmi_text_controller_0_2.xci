@@ -4,7 +4,7 @@
     "xci_name": "mb_block_hdmi_text_controller_0_2",
     "cell_name": "hdmi_text_controller_0",
     "component_reference": "xilinx.com:user:hdmi_text_controller_thissss:1.0",
-    "ip_revision": "17",
+    "ip_revision": "38",
     "gen_directory": "../../../../../../lab7.gen/sources_1/bd/mb_block/ip/mb_block_hdmi_text_controller_0_2",
     "parameters": {
       "component_parameters": {
@@ -35,7 +35,7 @@
       },
       "runtime_parameters": {
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
-        "IPREVISION": [ { "value": "17" } ],
+        "IPREVISION": [ { "value": "38" } ],
         "MANAGED": [ { "value": "TRUE" } ],
         "OUTPUTDIR": [ { "value": "../../../../../../lab7.gen/sources_1/bd/mb_block/ip/mb_block_hdmi_text_controller_0_2" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
