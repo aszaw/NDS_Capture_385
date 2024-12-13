@@ -116,6 +116,8 @@ OPTRACE "impl_1" END { }
 }
 
 set_msg_config -id {HDL-1065} -limit 10000
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 set_msg_config  -id {Synth 8-448}  -string {{ERROR: [Synth 8-448] named port connection 'dclk' does not exist for instance 'nds' of module 'nds_bram_write' [c:/Users/Aaro/Desktop/385/NDS_Capture_385/7_1_guyanw2/lab7/lab7.gen/sources_1/bd/mb_block/ipshared/9b63/src/hdmi_text_controller_v1_0.sv:237]}}  -suppress 
 set_msg_config  -id {Synth 8-448}  -string {{ERROR: [Synth 8-448] named port connection 'gsp' does not exist for instance 'nds' of module 'nds_bram_write' [c:/Users/Aaro/Desktop/385/NDS_Capture_385/7_1_guyanw2/lab7/lab7.gen/sources_1/bd/mb_block/ipshared/9b63/src/hdmi_text_controller_v1_0.sv:239]}}  -suppress 
 
@@ -125,9 +127,9 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param tcl.collectionResultDisplayLimit 0
+  set_param checkpoint.writeSynthRtdsInDcp 1
   set_param chipscope.maxJobs 4
-  set_param xicom.use_bs_reader 1
+  set_param synth.incrementalSynthesisCache C:/Users/Aaro/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-12376-DESKTOP-0G38QBS/incrSyn
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7s50csga324-1
   set_property design_mode GateLvl [current_fileset]

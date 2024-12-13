@@ -39,16 +39,42 @@ module nds_bram6(
     logic [17:0] doutb;                // Data output from BRAM (RGB packed into 24 bits)
     logic [15:0] addra, addrb;         // BRAM addresses (write/read)
     logic wea;                         // BRAM write enable
+    
+    logic [5:0] red_sync, green_sync, blue_sync;
+    
+    // Similarly synchronize green and blue
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        red_sync <= 6'b0;
+        green_sync <= 6'b0;
+        blue_sync <= 6'b0;
+    end else begin
+        red_sync <= red;
+        green_sync <= green;
+        blue_sync <= blue;
+    end
+end
 
     // Pixel counter and address
     logic [15:0] pixel_count;          // Pixel counter for the NDS
 
     // Assign RGB to BRAM write data
-    assign dina = {red, green, blue};  // Pack RGB into 24-bit format
+    assign dina = {red_sync, green_sync, blue_sync};  // Pack RGB into 24-bit format
+    
+    logic [15:0] addra_reg;
+
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        addra_reg <= 16'b0;
+    end else begin
+        addra_reg <= addra; // Register write address
+    end
+end
+
 
     // Dual-port BRAM instantiation
     blk_mem_gen_0 bram (
-        .addra(addra),     // Write address (Port A)
+        .addra(addra_reg),     // Write address (Port A)
         .clka(clk),        // Write clock (Port A)
         .dina(dina),       // Data input (Port A)
         .douta(),          // Unused output (Port A)
@@ -62,7 +88,6 @@ module nds_bram6(
         .web(1'b0)         // Write disabled for Port B
     );
 
-    logic dclk_prev; // Previous state of dclk to detect edges
     logic [8:0] line_count;
 
 // Write Logic: Store pixel data from NDS into BRAM

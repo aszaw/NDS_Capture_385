@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Dec 12 01:19:44 2024" VIVADOVERSION="2022.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Dec 12 02:46:40 2024" VIVADOVERSION="2022.2">
 
   <SYSTEMINFO ARCH="spartan7" DEVICE="7s50" NAME="mb_block" PACKAGE="csga324" SPEEDGRADE="-1"/>
 
@@ -1149,7 +1149,7 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
-    <MODULE COREREVISION="38" FULLNAME="/hdmi_text_controller_0" HWVERSION="1.0" INSTANCE="hdmi_text_controller_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="hdmi_text_controller_thissss" VLNV="xilinx.com:user:hdmi_text_controller_thissss:1.0">
+    <MODULE COREREVISION="40" FULLNAME="/hdmi_text_controller_0" HWVERSION="1.0" INSTANCE="hdmi_text_controller_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="hdmi_text_controller_thissss" VLNV="xilinx.com:user:hdmi_text_controller_thissss:1.0">
       <DOCUMENTS/>
       <ADDRESSBLOCKS>
         <ADDRESSBLOCK ACCESS="" INTERFACE="AXI" NAME="AXI_reg" RANGE="4096" USAGE="register"/>

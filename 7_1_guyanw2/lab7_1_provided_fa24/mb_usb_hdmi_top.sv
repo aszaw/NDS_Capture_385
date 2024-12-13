@@ -82,12 +82,31 @@ module mb_usb_hdmi_top(
     logic reset_ah;
     
     assign reset_ah = reset_rtl_0;
+    logic reset_al;
+    assign reset_al = ~reset_ah;
     
     wire dclk_bufg;
 BUFG bufg_inst (
 .I(DCLK),
 .O(dclk_bufg)
 );
+
+logic dclk_sync, dclk_sync_prev;
+
+// Synchronize dclk_bufg to clk domain
+always_ff @(posedge clk or posedge reset_al) begin
+    if (reset_al) begin
+        dclk_sync <= 1'b0;
+        dclk_sync_prev <= 1'b0;
+    end else begin
+        dclk_sync_prev <= dclk_sync; // Shift the current value
+        dclk_sync <= dclk_bufg;      // Synchronize buffered DCLK
+    end
+end
+
+// Detect rising edge of synchronized dclk
+logic dclk_rising_edge;
+assign dclk_rising_edge = dclk_sync && !dclk_sync_prev;
 
 pins_xor pins_xor (
     .R0(T_R0),
@@ -111,9 +130,9 @@ pins_xor pins_xor (
     .B4(T_B4),
     .B5(T_B5),
     
-    .reset_n(reset_rtl_0),
+    .reset_n(reset_al),
     
-    .DCLK(dclk_bufg),
+    .DCLK(dclk_rising_edge),
     .GSP(GSP),
     .LS(LS),
     .CLK(Clk),
