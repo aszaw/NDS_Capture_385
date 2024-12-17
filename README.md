@@ -3,7 +3,7 @@ Nintendo DS Capture Card written in SystemVerilog for the Urbana Board (Xilinx S
 
 Final Project for ECE 385 Digital Systems Labratory
 
-Co-author: Allannn-sudo
+Co-author and Final Project Partner: Allan Wang (Allannn-sudo)
 
 Usage:
 1. Solder wire onto pins T_R0 through T_G5 (there are 18 color data signals, 6 for each color)
